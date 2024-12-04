@@ -13,18 +13,18 @@
 
 Recurrent Neural Networks (RNNs) are a class of neural networks designed for processing sequential data, such as time series, text, or video frames, where the order of data is crucial. Unlike traditional feedforward neural networks, RNNs incorporate loops within their architecture, allowing information to persist across time steps. This capability makes RNNs particularly effective at modeling temporal dependencies and patterns in sequential data.
 
-In an RNN, the output at each time step depends not only on the current input but also on the hidden state, which encapsulates information from previous time steps. Mathematically, the hidden state at time $ t ( h_t )$ is computed as follows:
+In an RNN, the output at each time step depends not only on the current input but also on the hidden state, which encapsulates information from previous time steps. Mathematically, the hidden state at time $t ( h_t )$ is computed as follows:
 
 $$
 h_t = f(W_xx_t + W_hh_{t-1} + b)
 $$
 
 Here:
-- $ x_t $: Input at time step $ t $
-- $ h_{t-1} $: Hidden state from the previous time step
-- $ W_x $, $ W_h $: Weight matrices
-- $ b $: Bias term
-- $ f $: Activation function (typically tanh or ReLU)
+- $x_t$: Input at time step $t$
+- $h_{t-1}$: Hidden state from the previous time step
+- $W_x$, $W_h$: Weight matrices
+- $b$: Bias term
+- $f$: Activation function (typically tanh or ReLU)
 
 Despite their effectiveness, standard RNNs face challenges when learning long-term dependencies due to the vanishing gradient problem. To overcome this limitation, variations such as Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) were introduced.
 
@@ -37,31 +37,31 @@ LSTMs are a specialized type of RNN designed to handle long-term dependencies mo
 At each time step, the LSTM computes the following:
 1. **Forget gate**: Decides which information to discard from the cell state.
 
-   $$
-   f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
-   $$
+$$
+f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
+$$
 
 2. **Input gate**: Determines which new information to store in the cell state.
 
-   $$
-   i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
-   $$
-   $$
-   \tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
-   $$
+$$
+i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
+$$
+$$
+\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+$$
 3. **Cell state update**:
 
-   $$
-   C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
-   $$
+$$
+C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
+$$
 4. **Output gate**: Decides what to output based on the cell state.
 
-   $$
-   o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
-   $$
-   $$
-   h_t = o_t * \tanh(C_t)
-   $$
+$$
+o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+$$
+$$
+h_t = o_t * \tanh(C_t)
+$$
 
 LSTMs are highly effective for tasks involving long sequences, such as speech recognition, machine translation, and video analysis.
 
@@ -74,24 +74,24 @@ GRUs are a simplified version of LSTMs that also address the vanishing gradient 
 The GRU cell is computed as follows:
 1. **Update gate**:
 
-   $$
-   z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)
-   $$
+$$
+z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)
+$$
 2. **Reset gate**:
 
-   $$
-   r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)
-   $$
+$$
+r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)
+$$
 3. **Candidate hidden state**:
 
-   $$
-   \tilde{h}_t = \tanh(W \cdot [r_t * h_{t-1}, x_t] + b)
-   $$
+$$
+\tilde{h}_t = \tanh(W \cdot [r_t * h_{t-1}, x_t] + b)
+$$
 4. **Hidden state update**:
 
-   $$
-   h_t = z_t * h_{t-1} + (1 - z_t) * \tilde{h}_t
-   $$
+$$
+h_t = z_t * h_{t-1} + (1 - z_t) * \tilde{h}_t
+$$
 
 GRUs require fewer parameters than LSTMs, making them faster to train and suitable for smaller datasets while still achieving comparable performance.
 
