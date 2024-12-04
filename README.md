@@ -46,14 +46,17 @@ $$
 $$
 i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
 $$
+
 $$
-\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+C̃_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
 $$
+
 3. **Cell state update**:
 
 $$
 C_t = f_t * C_{t-1} + i_t * \tilde{C}_t
 $$
+
 4. **Output gate**: Decides what to output based on the cell state.
 
 $$
@@ -72,21 +75,25 @@ LSTMs are highly effective for tasks involving long sequences, such as speech re
 GRUs are a simplified version of LSTMs that also address the vanishing gradient problem. GRUs combine the forget and input gates into a single **update gate** and directly control the hidden state without using a separate memory cell. This simplification reduces the computational complexity of GRUs while still maintaining their effectiveness for capturing long-term dependencies.
 
 The GRU cell is computed as follows:
+
 1. **Update gate**:
 
 $$
 z_t = \sigma(W_z \cdot [h_{t-1}, x_t] + b_z)
 $$
+
 2. **Reset gate**:
 
 $$
 r_t = \sigma(W_r \cdot [h_{t-1}, x_t] + b_r)
 $$
+
 3. **Candidate hidden state**:
 
 $$
-\tilde{h}_t = \tanh(W \cdot [r_t * h_{t-1}, x_t] + b)
+h̃_t = \tanh(W \cdot [r_t * h_{t-1}, x_t] + b)
 $$
+
 4. **Hidden state update**:
 
 $$
